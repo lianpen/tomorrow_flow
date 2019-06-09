@@ -22,6 +22,9 @@
         prop="a5"
         label="产值" />
 		</el-table>
+		<div class="q-print">
+			{{ qPrint }}
+		</div>	
   </div>
 </template>
 
@@ -35,7 +38,8 @@ export default {
 	data() {
 		return {
 			flowList: FL,
-			width: 210 * 3.78 + 'px'
+			width: 210 * 3.78 + 'px',
+			qPrint: document.documentElement.clientWidth + ',' + document.documentElement.clientHeight
 		}
 	},
 	methods: {
