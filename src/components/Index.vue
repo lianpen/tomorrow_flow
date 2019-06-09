@@ -73,7 +73,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang='stylus'>
+<style lang='stylus' scoped>
 	h3
 		color: red
 		text-align: center
@@ -89,6 +89,7 @@ export default {
 			td, th
 				border-color: #000 !important
 	.el-table 
+		color: #000 !important
 		border-color: #000 !important
 	.el-table:before, .el-table:after
 		background-color: #000 !important
