@@ -3,17 +3,8 @@
 		:style="style">
 		<div class="l-outerBorder" 
 			:style="[ style, { borderColor: color } ]" />
-		<div class="l-sealCenter">
-			<seal-center :type='1'
-				:width='width' 
-				:height='height'
-				:color='color' />
-		</div>	
-		<div class="l-bottomText">
-			<h3>业务专用章</h3>
-			<!--<p>(12)</p>-->
-			<p>(12)</p>
-		</div>
+		<slot name='sealCenter'></slot>
+		<slot name='bottomText'></slot>
 		<div class="l-arcText">
 			<arc-text
 				:width='width'
@@ -23,14 +14,16 @@
 				:fontSize='fontSize'
 				:text='company'
 				:color='color'
-				:fontFamily='fontFamily'>
+				:fontFamily='fontFamily'
+				:borderWidth='borderWidth'>
 			</arc-text>
 		</div>
 		<div class="l-mask"></div>
 		<div class="l-hollowPixels">
 			<hollow-pixels 
 				:width='width'
-				:height='height' />
+				:height='height'
+				:rate='hollowRate' />
 		</div>
 	</div>
 </template>
@@ -83,6 +76,17 @@
 			color: {
 				type: String,
 				default: 'red'
+			},
+			borderWidth: {
+				type: Number,
+				default: 15
+			},
+			/**
+			 * 镂空率
+			 */
+			hollowRate: {
+				type: Number,
+				default: 1.4
 			}
 		},
 		computed: {

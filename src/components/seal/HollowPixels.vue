@@ -19,6 +19,10 @@
 			height: {
 				type: Number,
 				required: true
+			},
+			rate: {
+				type: Number,
+				default: 1.4
 			}
 		},
 		mounted() {
@@ -29,7 +33,7 @@
 			//绘制成矩形
 			for (let i = 0; i < this.width; i += 1) {
 				for (let j = 0; j < this.height; j += 1) {
-					let isFill = (Math.random() * this.height + j) > this.height * 1.4
+					let isFill = (Math.random() * this.height + j) > this.height * this.rate
 					if (isFill) {
 						ctx.fillRect(i, j, 1, 1)
 					}
