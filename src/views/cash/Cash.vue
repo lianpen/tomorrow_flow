@@ -70,7 +70,7 @@
 			  <el-table-column
 				prop="target"
 				label="对方账号和户名"
-					width="256"  />
+					width="244"  />
 			</el-table>
 		</div>
 		<div class='l-printInfo'>
@@ -237,11 +237,13 @@ export default {
 
 <style lang='stylus'>
 	.c-print
-		transform: scale(.9)
+		// transform: scale(.9)
 		font-size: 12px
 		font-family: monospace
 		color: #000
 		line-height: 1
+		.el-table--scrollable-x .el-table__body-wrapper
+			overflow: hidden
 		.l-title
 			h3
 				text-align: center
