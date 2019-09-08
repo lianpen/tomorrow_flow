@@ -60,7 +60,7 @@
 		},
 		data() {
 			return {
-				date: '2019年7月31日',
+				date: '2019年8月31日',
 				color: '#d02d2d'
 			}
 		}
