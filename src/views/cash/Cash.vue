@@ -93,6 +93,8 @@ import SalaryFlow from '@/model/SalaryFlow'
 import InterestFlow from '@/model/InterestFlow.js'
 import ConsumeFlow from '@/model/ConsumeFlow.js'
 import InvestFlow from '@/model/InvestFlow.js'
+import RateFlow from '@/model/RateFlow.js'
+import ConsumeBackFlow from '@/model/ConsumeBackFlow.js'
 import moment from 'moment'
 import Seal from '@/components/seal/Seal.vue'
 import SealCenter from '@/components/seal/SealCenter.vue'
@@ -101,9 +103,9 @@ import SealCenter from '@/components/seal/SealCenter.vue'
 let params = {
 	startTime: '20190101',
 	startMoney: 143952.19,
-	endTime: '20190722',
-	printTime: '15:15:29',
-	salary: 20000,
+	endTime: '20190916',
+	printTime: '10:15:29',
+	salary: 16200,
 	rewardDate: '15'
 }
 
@@ -145,12 +147,50 @@ export default {
 		 * 2. 每日随机消费50-150元
 		 * 3. 每月15号发工资
 		 * 4. 大于12万时 提款10w
+		 * 5. 结汇
+		 * 6. 消费退货
 		 */
 		_handleDate(momentPointer) {
 			this._handleInterest(momentPointer)
 			this._handleConsume(momentPointer)
 			this._handleSalary(momentPointer)
 			this._handleInvest(momentPointer)
+			this._handleRate(momentPointer)
+			this._handleConsumeBack(momentPointer)
+		},
+		/**
+		 * 结汇
+		 */
+		_handleRate(momentPointer) {
+			let month = momentPointer.month()
+			let date = momentPointer.date()
+			if (month == 7 && date == 14) {
+				let flow = new RateFlow({
+					date: momentPointer,
+					moneyBefore: this.money
+				})
+				this.money += flow.amount
+				this.flowList.push(flow)
+			}
+		},
+		/**
+		 * 消费退货
+		 */
+		_handleConsumeBack(momentPointer) {
+			let month = momentPointer.month()
+			let date = momentPointer.date()
+			if (
+				month == 1 && date == 2
+				||
+				month == 5 && date == 17
+			) {
+				let flow = new ConsumeBackFlow({
+					date: momentPointer,
+					moneyBefore: this.money
+				})
+				this.money += flow.amount
+				this.flowList.push(flow)
+			}
 		},
 		/**
 		 * 利息 36912月21日 利率0.3%
