@@ -29,12 +29,12 @@
 			</h3>
 		</div>
 		<div class='l-subTitle'>
-			<span>卡号/帐号：6217001210075271237</span>
-			<span>客户名称：惠连鹏</span>
-			<span>币别：人命币元</span>
-			<span>钞汇标志：钞</span>
-			<span>起始日期：{{ startStr }}</span>
-			<span>截止日期：{{ endStr }}</span>
+			<span>卡号/帐号:6217001210075271237</span>
+			<span>客户名称:惠连鹏</span>
+			<span>币别:人命币元</span>
+			<span>钞汇标志:钞</span>
+			<span>起始日期:{{ startStr }}</span>
+			<span>截止日期:{{ endStr }}</span>
 		</div>
 		<div class="l-table">
 			<el-table :data='tableData' border
