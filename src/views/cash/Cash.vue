@@ -347,7 +347,7 @@ export default {
 		.l-subTitle
 			margin-bottom: 10px
 			span
-				margin-right: 10px
+				margin-right: 8px
 		.l-table
 			table
 				background: none
