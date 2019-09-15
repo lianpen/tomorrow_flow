@@ -60,7 +60,7 @@
 			  <el-table-column
 				prop="date"
 				label="交易日期"
-						:width="64 * printScale"/>
+						:width="72 * printScale"/>
 			  <el-table-column
 				prop="amount"
 				label="交易金额"
@@ -91,7 +91,7 @@
 		</div>
 		<div class="l-pager"
 			:style="{ fontSize: 17 * printScale + 'px' }">
-			- 第1页 / 共1页 -
+			- 第1页 /共1页 -
 		</div>
 		<div class="l-printScaleController"
 			v-if='showPrintScale'>
@@ -139,7 +139,7 @@ export default {
 			/**
 			 * 打印机不同比例调整系数
 			 */
-			printScale: 0.948,
+			printScale: 0.916,
 			showPrintScale: false
 		}, params)
 	},
@@ -360,6 +360,8 @@ export default {
 						background: none
 					td
 						height: 32px
+					.cell
+						line-height: 1.3
 					td, th
 						font-weight: normal
 						color: #000

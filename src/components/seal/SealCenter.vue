@@ -39,8 +39,8 @@
 			type1Style() {
 				return {
 					width: this.width * .58 + 'px',
-					height: this.height * .19 + 'px',
-					margin: this.height * .42 + 'px auto',
+					height: this.height * .20 + 'px',
+					margin: this.height * .41 + 'px auto',
 					borderColor: this.color
 				}
 			}
