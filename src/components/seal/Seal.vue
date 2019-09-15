@@ -2,7 +2,7 @@
 	<div class="c-seal" 
 		:style="style">
 		<div class="l-outerBorder" 
-			:style="[ style, { borderColor: color } ]" />
+			:style="[ style, { borderColor: color, borderWidth: 4 * scale + 'px' } ]" />
 		<slot name='sealCenter'></slot>
 		<slot name='bottomText'></slot>
 		<div class="l-arcText">
@@ -87,6 +87,13 @@
 			hollowRate: {
 				type: Number,
 				default: 1.4
+			},
+			/**
+			 * 打印比例
+			 */
+			scale: {
+				type: Number,
+				default: 1
 			}
 		},
 		computed: {

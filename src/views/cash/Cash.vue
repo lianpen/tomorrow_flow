@@ -1,30 +1,36 @@
 <template>
-	<div class="c-print" :style='{ width: 800 }' v-if='tableData'>
+	<div class="c-print" 
+	:style='{ "font-size": 12 * printScale + "px" }' 
+	v-if='tableData'>
 		<div class="l-seal">
 			<seal
-				:width='160'
-				:height='160'
+				:width='160 * printScale'
+				:height='160 * printScale'
 				:startAngle='-100'
 				:endAngle='100'
-				:fontSize='16'
+				:fontSize='16 * printScale'
 				fontFamily='汉仪长宋简'
-				color='#d02d2d'
-				company='中国建设银行股份有限公司上海高化支行'>
-				<div class="l-bottomText" slot='bottomText'>
+				color='#da2e52'
+				:scale='printScale'
+				company='中国建设银行股份有限公司上海高化支行'
+				:hollowRate='1.6'>
+				<div class="l-bottomText" slot='bottomText'
+					:style="{ fontSize: 17 * printScale + 'px' }">
 					<h3>业务专用章</h3>
 					<!--<p>(12)</p>-->
 					<p>(12)</p>
 				</div>
 				<div class="l-sealCenter" slot='sealCenter'>
 					<seal-center
-						:width='160' 
-						:height='160'
-						color='#d02d2d' />
+						:width='160 * printScale' 
+						:height='160 * printScale'
+						color='#da2e52' />
 				</div>	
 			</seal>
 		</div>
 		<div class="l-title">
-			<h3>
+			<h3
+				:style="{ fontSize: 17 * printScale + 'px', marginBottom: 20 * printScale + 'px' }">
 				中国建设银行个人账户收入交易明细
 			</h3>
 		</div>
@@ -38,39 +44,41 @@
 		</div>
 		<div class="l-table">
 			<el-table :data='tableData' border
-				:width='800'>
+				:width='800 * printScale'
+				:cellStyle='{ "font-size": 12 * printScale + "px" }'
+				:headerCellStyle='{ "font-size": 12 * printScale + "px" }'>
 			  <el-table-column
 				prop="index"
 				label=""
-						width="27"
+						:width="27 * printScale"
 						 class-name='column-index'
 						 />
 			  <el-table-column
 				prop="summary"
 				label="摘要"
-						width="70" />
+						:width="70 * printScale" />
 			  <el-table-column
 				prop="date"
 				label="交易日期"
-						width="64"/>
+						:width="64 * printScale"/>
 			  <el-table-column
 				prop="amount"
 				label="交易金额"
-						width="96"
+						:width="96 * printScale"
 						 align='right' />
 			  <el-table-column
 				prop="rest"
 				label="账户余额"
-						width="110"
+						:width="110 * printScale"
 						 align='right'  />
 			  <el-table-column
 				prop="location"
 				label="交易地点/附言"
-						width="176"  />
+						:width="176 * printScale"  />
 			  <el-table-column
 				prop="target"
 				label="对方账号和户名"
-					width="244"  />
+					:width="244 * printScale"  />
 			</el-table>
 		</div>
 		<div class='l-printInfo'>
@@ -81,8 +89,16 @@
 				打印机构: 建行上海高化支行[310614039]
 			</span>
 		</div>
-		<div class="l-pager">
+		<div class="l-pager"
+			:style="{ fontSize: 17 * printScale + 'px' }">
 			- 第1页 / 共1页 -
+		</div>
+		<div class="l-printScaleController"
+			v-if='showPrintScale'>
+			<input type='text' 
+				@input='onInputPrintScale'
+				:value='printScale'/>
+			{{ printScale }}
 		</div>
   </div>
 </template>
@@ -119,10 +135,23 @@ export default {
 		return Object.assign({
 			money: 0,
 			flowList: [],
-			tableData: []
+			tableData: [],
+			/**
+			 * 打印机不同比例调整系数
+			 */
+			printScale: 0.948,
+			showPrintScale: false
 		}, params)
 	},
 	created() {
+		window.document.onkeydown = event => {
+			let keyCode = event.keyCode
+			switch(keyCode) {
+				case 65:
+					this.togglePrintScale()
+					break;
+			}
+		}
 		this.money = this.startMoney
 		let startMoment = moment(this.startTime, 'YYYYMMDD')
 		let endMoment = moment(this.endTime, 'YYYYMMDD')
@@ -141,6 +170,21 @@ export default {
 		this.tableData = tableData
 	},
 	methods: {
+		/**
+		 * 开关打印系数面板
+		 */
+		togglePrintScale() {
+			this.showPrintScale = !this.showPrintScale
+		},
+		/**
+		 * 改变打印比例系数
+		 */
+		onInputPrintScale(event) {
+			let input = event.target.value
+			let scale = parseFloat(input)
+			if (!isNaN(scale) && scale) 
+				this.printScale = scale
+		},
 		/**
 		 * 单日处理
 		 * 1. 36912月21日 发放利息
@@ -269,7 +313,17 @@ export default {
 			let m = moment(this.endTime, 'YYYYMMDD')
 			let dateStr = m.format('YYYY年MM月DD日')
 			return dateStr
+		},
+		sealStyle() {
+			return {
+				transform: 'scale(' + this.printScale + ')'
+			}
 		}
+	},
+	mounted() {
+		this.$nextTick(() => {
+			console.log(1)
+		})
 	}
 }
 
@@ -277,7 +331,7 @@ export default {
 
 <style lang='stylus'>
 	.c-print
-		// transform: scale(.9)
+		//transform: scale(.9)
 		font-size: 12px
 		font-family: monospace
 		color: #000
@@ -321,8 +375,14 @@ export default {
 				border-color: #000
 				font-size: 12px
 				background: none
+				:before
+					height: 0
 			.el-table:before, .el-table:after
 				background-color: #000
+			.el-table__column-resize-proxy:after 
+				display: none
+			.el-table--border:after
+				display: none
 		.l-printInfo
 			margin-top: 1px
 			margin-left: 2px

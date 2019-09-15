@@ -96,6 +96,9 @@
 				}
 			}
 		},
+		beforeUpdate() {
+			this.main()
+		},
 		methods: {
 			/**
 			 * 算法入口
