@@ -29,21 +29,7 @@
 				</p>
 			</div>
 			<div class="l-seal">
-				<c-seal
-					:width='160'
-					:height='160'
-					:startAngle='-140'
-					:endAngle='140'
-					:fontSize='20'
-					:borderWidth='17'
-					fontFamily='汉仪长宋简'
-					:color='color'
-					company='湖北群艺积分制咨询管理有限公司上海分公司'
-					:hollowRate='1.8' >
-					<div class="l-sealCenter" slot='sealCenter'>
-						<c-pentagram :color='color'></c-pentagram>
-					</div>
-				</c-seal>
+				<img :src='imgUrl' />
 			</div>
 		</div>
 	</div>
@@ -61,7 +47,8 @@
 		data() {
 			return {
 				date: '2019年8月31日',
-				color: '#d02d2d'
+				color: '#d02d2d',
+				imgUrl:require("@/assets/seal.png")
 			}
 		}
 	}
@@ -69,7 +56,7 @@
 
 <style lang='stylus'>
 	.c-resign
-		font-size: 16px
+		font-size: 18px
 		width: 800px
 		.c-resign-wrapper
 			width: 600px
@@ -96,14 +83,9 @@
 				p
 					margin-bottom: 20px
 			.l-seal
-				.c-seal
-					left: 547px
-					top: 290px
-					transform: rotate(-28deg)
-					.l-sealCenter
-						position: absolute
-						top: 50%
-						left: 50%
-						.c-pentagram
-							transform: translate(-50%, -50%)
+				position: relative
+				left: 228px
+				top: -341px
+				z-index: -1
+				transform: scale(0.3, 0.3) rotate(-28deg)
 </style>

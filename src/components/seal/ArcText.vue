@@ -133,7 +133,7 @@
 					x += this.textOffset.x
 					y += this.textOffset.y
 					// 文字旋转
-					let transform = 'rotate(' + angle + 'deg)'
+					let transform = 'rotate(' + angle + 'deg) scale(1, 1.2)'
 					// 样式汇总计算
 					ro.style = {
 						left: x + 'px',

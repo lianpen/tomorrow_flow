@@ -15,7 +15,7 @@
 				:text='company'
 				:color='color'
 				:fontFamily='fontFamily'
-				:borderWidth='borderWidth'>
+				:borderWidth='19'>
 			</arc-text>
 		</div>
 		<div class="l-mask"></div>
