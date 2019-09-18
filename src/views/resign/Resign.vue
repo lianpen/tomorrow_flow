@@ -85,7 +85,7 @@
 					transform: rotate(-28deg)
 					position: absolute
 					right: 9px
-					top: -192px
-					width: 190px
-					height: 190px
+					top: -168px
+					width: 156px
+					height: 156px
 </style>
