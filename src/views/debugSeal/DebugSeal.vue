@@ -41,12 +41,8 @@
 </script>
 
 <style lang='stylus'>
-	.c-resign
-		font-size: 18px
-		width: 800px
+	.c-resign1
 		.c-resign-wrapper
-			width: 600px
-			margin: 0 auto
 			.l-seal
 				.c-seal
 					left: 222px

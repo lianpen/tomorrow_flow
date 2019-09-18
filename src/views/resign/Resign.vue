@@ -38,11 +38,9 @@
 
 <script>
 	import Seal from '@/components/seal/Seal.vue'
-	import Pentagram from './Pentagram.vue'
 	export default {
 		components: {
-			'c-seal': Seal,
-			'c-pentagram': Pentagram
+			'c-seal': Seal
 		},
 		data() {
 			return {
@@ -57,10 +55,8 @@
 <style lang='stylus'>
 	.c-resign
 		font-size: 18px
-		width: 800px
 		.c-resign-wrapper
-			width: 600px
-			margin: 0 auto
+			margin: 0 80px
 			.l-title
 				font-size: 24px
 				font-weight: bold
@@ -84,8 +80,12 @@
 					margin-bottom: 20px
 			.l-seal
 				position: relative
-				left: 228px
-				top: -341px
-				z-index: -1
-				transform: scale(0.3, 0.3) rotate(-28deg)
+				img 
+					z-index: -1
+					transform: rotate(-28deg)
+					position: absolute
+					right: 9px
+					top: -192px
+					width: 190px
+					height: 190px
 </style>
