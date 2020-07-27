@@ -15,8 +15,8 @@ class SalaryFlow extends Flow {
 		let money = this.getMoney(o.salary)
 		this.amount = money
 		this.rest = o.moneyBefore + money
-		this.location = '中国建设银行股份有限公司荆门分行'
-		this.target = '6236682700000850028李荣'
+		this.location = '中国建设银行股份有限公司上海分行'
+		this.target = '欧游酒店管理（上海）有限公司'
 	}
 	
 	getMoney(salary) {
@@ -26,14 +26,8 @@ class SalaryFlow extends Flow {
 		/**
 		 * 年终3薪
 		 */
-		if (month == 2) {
-			result *= 3
-		}
-		/**
-		 * 最近月少些
-		 */
-		if (month == 8) {
-			result -= 1000
+		if (month == 9) {
+			result -= 5000
 		}
 		return result
 	}

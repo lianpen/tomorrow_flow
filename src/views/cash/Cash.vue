@@ -3,6 +3,7 @@
 	:style='{ "font-size": 12 * printScale + "px" }' 
 	v-if='tableData'>
 		<div class="l-seal">
+			<div style='display:none'>
 			<seal
 				:width='160 * printScale'
 				:height='160 * printScale'
@@ -27,6 +28,8 @@
 						color='#da2e52' />
 				</div>	
 			</seal>
+			</div>
+			<img :src='imgUrl' />
 		</div>
 		<div class="l-title">
 			<h3
@@ -117,12 +120,12 @@ import SealCenter from '@/components/seal/SealCenter.vue'
 
 
 let params = {
-	startTime: '20190101',
-	startMoney: 143952.19,
-	endTime: '20190916',
-	printTime: '10:15:29',
-	salary: 16200,
-	rewardDate: '15'
+	startTime: '20190801',
+	startMoney: 0,
+	endTime: '20200727',
+	printTime: '15:15:29',
+	salary: 17100,
+	rewardDate: '10'
 }
 
 export default {
@@ -140,7 +143,8 @@ export default {
 			 * 打印机不同比例调整系数
 			 */
 			printScale: 0.916,
-			showPrintScale: false
+			showPrintScale: false,
+			imgUrl:require("@/assets/11.png")
 		}, params)
 	},
 	created() {
@@ -198,6 +202,7 @@ export default {
 			this._handleInterest(momentPointer)
 			this._handleConsume(momentPointer)
 			this._handleSalary(momentPointer)
+			this._handleYearSalary(momentPointer)
 			this._handleInvest(momentPointer)
 			this._handleRate(momentPointer)
 			this._handleConsumeBack(momentPointer)
@@ -206,6 +211,7 @@ export default {
 		 * 结汇
 		 */
 		_handleRate(momentPointer) {
+			return;
 			let month = momentPointer.month()
 			let date = momentPointer.date()
 			if (month == 7 && date == 14) {
@@ -221,12 +227,11 @@ export default {
 		 * 消费退货
 		 */
 		_handleConsumeBack(momentPointer) {
+			return;
 			let month = momentPointer.month()
 			let date = momentPointer.date()
 			if (
 				month == 1 && date == 2
-				||
-				month == 5 && date == 17
 			) {
 				let flow = new ConsumeBackFlow({
 					date: momentPointer,
@@ -261,6 +266,7 @@ export default {
 		 * 工资
 		 */
 		_handleSalary(momentPointer) {
+			if (momentPointer.month() == 7 || momentPointer.month() == 8) return;
 			if (momentPointer.date() == this.rewardDate) {
 				let flow = new SalaryFlow({
 					date: momentPointer,
@@ -272,9 +278,24 @@ export default {
 			}
 		},
 		/**
+		 * 年终奖
+		 */
+		_handleYearSalary(momentPointer) {
+			if (momentPointer.format('YYYYMMDD') == '20200120') {
+				let flow = new SalaryFlow({
+					date: momentPointer,
+					salary: 18291.13,
+					moneyBefore: this.money
+				})
+				this.money += 18291.13
+				this.flowList.push(flow)
+			}
+		},
+		/**
 		 * 消费
 		 */
 		_handleConsume(momentPointer) {
+			return;
 			let flow = new ConsumeFlow({
 				date: momentPointer,
 				moneyBefore: this.money
@@ -338,6 +359,11 @@ export default {
 		line-height: 1
 		.el-table--scrollable-x .el-table__body-wrapper
 			overflow: hidden
+		.l-seal
+			position: fixed
+			left: 0
+			top: 17px
+			z-index: -1
 		.l-title
 			h3
 				text-align: center
